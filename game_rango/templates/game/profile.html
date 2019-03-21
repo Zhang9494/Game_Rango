@@ -1,0 +1,36 @@
+{% extends 'game/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Your profile
+{% endblock %}
+
+
+{% block body_block %}
+<div class="card" style="width: 18rem;">
+    <img src="{{ MEDIA_URL }}{{ userprofile.picture }}"
+         class="card-img-top"
+         alt="{{thisuser.username}}" />
+    <div class="card-body">
+        <h5>{{ thisuser.username}} Profile</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+    {% if thisuser.username == user.username %}
+        <li class="list-group-item">
+            <p>Upload Avatar?</p>
+            <form method="POST" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update" />
+            </form>
+        </li>
+        <li class="list-group-item">
+            <a href=""></a>
+        </li>
+
+    {% endif %}
+</ul>
+</div>
+
+
+{% endblock %}

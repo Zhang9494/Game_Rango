@@ -1,0 +1,23 @@
+{% extends 'game/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+<h1>{{ message }}</h1>
+<form id="login_form" method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="formGroupExampleInput">Username:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="username" name="username" value="">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Password</label>
+        <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="password" name="password" value="">
+    </div>
+
+    <input type="submit" value="submit"/>
+</form>
+{% endblock %}

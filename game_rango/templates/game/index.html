@@ -1,0 +1,53 @@
+{% extends 'game/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Home
+{% endblock %}
+
+{% block body_block %}
+<link href="https://getbootstrap.com/docs/4.3/examples/pricing/pricing.css" rel="stylesheet">
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    {% if user.is_authenticated %}
+    <h1 class="display-4">Hi! {{ user.username }}!</h1>
+    {% else %}
+    <h1 class="display-4">Hi! </h1>
+    {% endif %}
+    <p class="lead">Here is the most favorable game!</p>
+</div>
+
+            {% if games %}
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+                {% for game in games %}
+      <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+              <h4 class="my-0 font-weight-normal">
+                  <a href="{% url 'show_game' game.slug %}">{{ game.title }}</a> </h4>
+          </div>
+          <img src="{{ MEDIA_URL }}{{ game.picture }}" class="card-img-top" alt="No picture here">
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                Category: <a href="{% url 'show_category' game.category.slug %}">{{ game.category }}</a>
+            </li>
+            <li class="list-group-item">
+                Publisher: {{ game.publisher }}
+            </li>
+            <li class="list-group-item">
+                Link: <a href="{{ game.url }}">{{ game.title }}</a>
+            </li>
+            <li  class="list-group-item">
+                Liked: {{ game.mark }}</p>
+            </li>
+            </ul>
+          </div>
+      </div>
+                {% endfor %}
+  </div>
+</div>
+            {% else %}
+            <strong>There are no games present.</strong>
+            {% endif %}
+{% endblock %}

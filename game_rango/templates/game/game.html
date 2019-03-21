@@ -1,0 +1,52 @@
+{% extends 'game/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ game.title }}
+{% endblock %}
+
+{% block body_block %}
+        {% if game %}
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <img src="{{ MEDIA_URL }}{{ game.picture }}" class="card-img-top" alt="No picture here">
+      <div class="card-body">
+        <h5 class="card-title">{{ game.title }}</h5>
+      </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                Category: <a href="{% url 'show_category' category.slug %}">{{ game.category }}</a>
+            </li>
+            <li class="list-group-item">
+                Publisher: {{ game.publisher }}
+            </li>
+            <li class="list-group-item">
+                Link: <a href="{{ game.url }}">{{ game.title }}</a>
+            </li>
+            <li  class="list-group-item">
+                Liked: <p id="like_count">{{ game.mark }}</p>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="list-group-item">
+                <button type="button" class="btn btn-danger" id="likes" data-gameid="{{ game.id }}">Like it?</button>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <h5 class="card-header">Comment here</h5>
+      <div class="card-body">
+            <div class="form-group">
+                <input type="text" class="form-control" id="id_comment">
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+        {% else %}
+            The game does not exist!
+        {% endif %}
+{% endblock %}

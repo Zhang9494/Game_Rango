@@ -1,0 +1,22 @@
+{% extends 'game/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Categories
+{% endblock %}
+
+{% block body_block %}
+            {% if categories %}
+            <div class="list-group">
+                {% for category in categories %}
+                <a href="{% url 'show_category' category.slug %}" class="list-group-item list-group-item-action">
+                    {{ category.name }}</a>
+                {% endfor %}
+
+             <a href="{% url 'add_category' %}">Add Category</a><br/>
+            {% else %}
+            <strong>There are no categories present.</strong>
+            </div>
+
+            {% endif %}
+{% endblock %}
